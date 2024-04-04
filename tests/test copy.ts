@@ -284,7 +284,6 @@ test.only(`Test 4. Go to New & Noteworthy -> Special Offers. Check that each gam
     let isChooseAgeWindowAppears = await Selector('#app_agegate').visible;
 
     if (isChooseAgeWindowAppears) {
-        // await t.debug();
         const ageYearSelector = Selector('select[name="ageYear"]')
         const optionsSelector = ageYearSelector.find('option');
         await t.click(ageYearSelector);

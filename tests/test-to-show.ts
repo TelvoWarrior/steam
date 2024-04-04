@@ -35,6 +35,7 @@ test('Steam test', async () => {
 
     Logger.step(3, `Hover game with Action RPG tag. Check its size changes and Add to wishlist button appears`);
     const gameCardIndex = await SubGenreGamePageSteps.getGameCardIndexWithSpecifiedTag(GameTag.ACTION_RPG);
+    await t.debug();
     await SubGenreGamePageSteps.hoverGameCard(gameCardIndex);
     await GameCardSteps.checkGameCardItemVisible(gameCardIndex, GameCardItem.WISHLIST_BUTTON);
 
@@ -43,13 +44,13 @@ test('Steam test', async () => {
     await MenuSteps.clickMenuItem(NewAndNoteworthyItem.SPECIAL_OFFERS);
     await SubGenreGamePageSteps.scrollIntoGameList();
     const len = await SubGenreGamePage.GAME_CARD_SELECTOR.count;
-    console.log(`List length is: ${len}`)
     for (let i = 0; i < len-1; i++) {
         console.log(`Check ${await GameCardSteps.getInnerText(i, GameCardItem.GAME_TITLE)}`);
         await GameCardSteps.checkGameCardItemVisible(i, GameCardItem.DISCOUNT_LABEL);
         await GameCardSteps.checkGameCardItemVisible(i, GameCardItem.DISCOUNT_PRICE_LABEL);
         await GameCardSteps.checkGameCardItemVisible(i, GameCardItem.REGULAR_PRICE_LABEL);
     }
+    
     Logger.step(5, `Hover game with the biggest discount. Check that the card changed its color`)
     const maxDiscountIndex = await GameCardSteps.getMaxDiscountGameCardIndex()
     await GameCardSteps.hoverGameCardItem(maxDiscountIndex, GameCardItem.GAME_TITLE);
@@ -59,7 +60,7 @@ test('Steam test', async () => {
     await GameCardSteps.clickGameCardItem(maxDiscountIndex, GameCardItem.GAME_TITLE);
     const gameCardDataInGamePage = await GamePageSteps.getGameCardData();
     await GamePageSteps.checkGamePageTitleExists(GamePage.TITLE);
-    // await GamePageSteps.checkGameDataTheSameAsInGameList(gameCardDataInGameList, gameCardDataInGamePage);
+    await GamePageSteps.checkGameDataTheSameAsInGameList(gameCardDataInGameList, gameCardDataInGamePage);
 
     Logger.step(7, `Click add to card button -> View cart. Check that Your Shopping Cart page is opened, game name, prices in the game card and total price are the same with the previous pages`)
     await GamePageSteps.clickGamePageItem(GamePage.ADD_TO_CART);
@@ -70,6 +71,14 @@ test('Steam test', async () => {
     await ShoppingCartSteps.checkGameCardData(gameCardDataInGameList, gameCardDataInGamePage, gameCardDataInDialogWindow, gameCardDataInCartPage);
 
     Logger.step(8, `Click any adverting game card. Click Add to Card. Check...`)
-    
+    await ShoppingCartSteps.clickRandomAdvGame();
+    const advGameDataInGamePage = await GamePageSteps.getGameCardData();
+    await GamePageSteps.clickGamePageItem(GamePage.ADD_TO_CART);
+    await DialogWindowSteps.clickDialogWindowItem(DialogWindow.VIEW_MY_CART);
+    const advGameDataInCartPage = await ShoppingCartSteps.getGameCardData(0);
+    await ShoppingCartSteps.checkGamesAmountInShoppingCart(2);
+    const gameDataAfterAddAdvGame = await ShoppingCartSteps.getGameCardData(1);
+    await ShoppingCartSteps.checkInCartGamesDataCorrect(gameCardDataInDialogWindow, gameDataAfterAddAdvGame, advGameDataInGamePage, advGameDataInCartPage);
+    await ShoppingCartSteps.checkSumDiscountTheSameAsEstimatedTotal();
 });
 

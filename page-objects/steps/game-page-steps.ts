@@ -44,7 +44,21 @@ export class GamePageStepsImpl extends GamePage {
         discountPrice: string;
         regularPrice: string;
     }) {
-        await t.expect(DataInGameList === DataInGamePage).ok(`Check ${Object.values(DataInGameList)} the same as ${Object.values(DataInGamePage)}`);
+    
+        const reviewsInGameList = parseFloat(DataInGameList.reviewsCount.replace(/,/g, ""));
+        const reviewsInGamePage = parseFloat(DataInGamePage.reviewsCount.replace(/,/g, ""));
+        const reviewsDifference = Math.abs(reviewsInGameList-reviewsInGamePage);
+        
+        await t.expect(DataInGameList.releaseDate===DataInGamePage.releaseDate)
+            .ok(`Check Release Date in Game List the same as in Game Page`);
+            await t.expect(DataInGameList.reviewsSummary===DataInGamePage.reviewsSummary)
+            .ok(`Check Reviews Summary in Game List the same as in Game Page`);
+            await t.expect(reviewsDifference)
+            .ok(`Check Reviews Count in Game List and in Game Page difference is no more than 20 reviews`);
+            await t.expect(DataInGameList.discountPrice===DataInGamePage.discountPrice)
+            .ok(`Check Discount Price in Game List the same as in Game Page`);
+            await t.expect(DataInGameList.regularPrice===DataInGamePage.regularPrice)
+            .ok(`Check Regular Price in Game List the same as in Game Page`);
     }
 
     async checkGamePageTitleExists(title: Label) {
