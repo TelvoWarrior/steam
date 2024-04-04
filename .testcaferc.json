@@ -1,0 +1,6 @@
+{
+    "skipJsErrors": true,
+    "disableMultipleWindows": true,
+    "disablePageCaching": true,
+    "disableNativeAutomation": true
+}
