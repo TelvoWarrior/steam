@@ -10,7 +10,7 @@ import { GameTag } from "../page-objects/enums/game-tags";
 import { SubGenreGamePage } from "../page-objects/pages/sub-genre-game-page";
 import { GamePageSteps } from "../page-objects/steps/game-page-steps";
 import { GamePage } from "../page-objects/pages/game-page";
-import { DialogWindow, DialogWindowItem } from "../page-objects/entities/dialog-window";
+import { DialogWindow } from "../page-objects/entities/dialog-window";
 import { DialogWindowSteps } from "../page-objects/steps/dialog-window-steps";
 import { ShoppingCartSteps } from "../page-objects/steps/shopping-cart-steps";
 import { ShoppingCart } from "../page-objects/pages/shopping-cart";
@@ -35,8 +35,7 @@ test('Steam test', async () => {
 
     Logger.step(3, `Hover game with Action RPG tag. Check its size changes and Add to wishlist button appears`);
     const gameCardIndex = await SubGenreGamePageSteps.getGameCardIndexWithSpecifiedTag(GameTag.ACTION_RPG);
-    await t.debug();
-    await SubGenreGamePageSteps.hoverGameCard(gameCardIndex);
+    await SubGenreGamePageSteps.checkGameCardSizeChangedAfterHover(gameCardIndex);
     await GameCardSteps.checkGameCardItemVisible(gameCardIndex, GameCardItem.WISHLIST_BUTTON);
 
     Logger.step(4, `Go to New & Noteworthy -> Special Offers. Check that each game card has discount label and 2 prices.`);
