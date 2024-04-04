@@ -1,15 +1,8 @@
-<<<<<<< HEAD
 import { Selector, t } from "testcafe";
 import { ShoppingCart } from "../pages/shopping-cart";
 import { Label } from "../elements/label";
 import { CartItem, CartItemEnum } from "../entities/cart-item";
 import { Logger } from "testcafe-reporter-acd-html-reporter/lib/Logger";
-=======
-import { t } from "testcafe";
-import { ShoppingCart } from "../pages/shopping-cart";
-import { Label } from "../elements/label";
-import { CartItem, CartItemEnum } from "../entities/cart-item";
->>>>>>> 37d2ca33bab7da10125f48b27865f4b6324423ed
 
 export class ShoppingCartStepsImpl extends ShoppingCart {
     async checkShoppingCartPageOpened(title: Label) {
@@ -60,15 +53,8 @@ export class ShoppingCartStepsImpl extends ShoppingCart {
     }) {
         await t.expect(gameCardDataInGameList.gameTitle === gameCardDataInGamePage.gameTitle)
             .ok(`Check game card title in game list and in game page are the same`);
-<<<<<<< HEAD
         await t.expect(gameCardDataInDialogWindow.gameTitle === gameCardDataInCartPage.gameTitle)
             .ok(`Check game card title in Dialog Window and in Cart Page are the same`);
-=======
-        await t.expect(gameCardDataInGameList.gameTitle === gameCardDataInDialogWindow.gameTitle)
-            .ok(`Check game card title in game list and in dialog window are the same`);
-        await t.expect(gameCardDataInGameList.gameTitle === gameCardDataInCartPage.gameTitle)
-            .ok(`Check game card title in game list and in cart page are the same`);
->>>>>>> 37d2ca33bab7da10125f48b27865f4b6324423ed
 
         await t.expect(gameCardDataInGameList.discountAmount === gameCardDataInGamePage.discountAmount)
             .ok(`Check game card discount amount in game list and in game page are the same`);
