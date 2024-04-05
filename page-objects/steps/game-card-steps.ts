@@ -4,21 +4,21 @@ import { SubGenreGamePage } from "../pages/sub-genre-game-page";
 
 export class GameCardStepsImpl extends GameCard {
     async hoverGameCardItem(nth: number, control: GameCardItem) {
-        GameCard.getSelector(nth, control).hover();
+        GameCard.getElement(nth, control).hover();
     }
 
     async clickGameCardItem(nth: number, control: GameCardItem) {
-        await GameCard.getSelector(nth, control).click();
+        await GameCard.getElement(nth, control).click();
     }
 
     async getInnerText(nth: number, control: GameCardItem) {
-        return GameCard.getSelector(nth, control).innerText;
+        return GameCard.getElement(nth, control).innerText;
     }
 
     async getListOfVisibleTags(nth: number) {
         let listOfVisibleItems: string[] = [];
-        let listItemsSelector = await GameCard.getSelector(nth, GameCardItem.GENRE_TAGS);
-        let itemsCount = await GameCard.getSelector(nth, GameCardItem.GENRE_TAGS).count;
+        let listItemsSelector = await GameCard.getElement(nth, GameCardItem.GENRE_TAGS);
+        let itemsCount = await GameCard.getElement(nth, GameCardItem.GENRE_TAGS).count;
         for (let i = 0; i < itemsCount; i++) {
             listOfVisibleItems.push(await listItemsSelector.nth(i).innerText);
         }
@@ -26,7 +26,7 @@ export class GameCardStepsImpl extends GameCard {
     }
 
     async isGameCardItemVisible(nth: number, control: GameCardItem) {
-        return GameCard.getSelector(nth, control).visible;
+        return GameCard.getElement(nth, control).visible;
     }
 
     async checkGameCardItemVisible(nth: number, control: GameCardItem, expect: boolean = true) {
@@ -52,11 +52,11 @@ export class GameCardStepsImpl extends GameCard {
     }
 
     async getTagArr(nth: number) {
-        const tagCount = GameCard.getSelector(nth, GameCardItem.GENRE_TAGS).count;
+        const tagCount = GameCard.getElement(nth, GameCardItem.GENRE_TAGS).count;
         console.log(`Tags Count: ${await tagCount}`)
         const tagArr: string[] = [];
         for (let i = 0; i < tagCount; i++) {
-            let tagName = GameCard.getSelector(nth, GameCardItem.GENRE_TAGS).nth(i);
+            let tagName = GameCard.getElement(nth, GameCardItem.GENRE_TAGS).nth(i);
             console.log(`current tag: ${tagName}`)
             tagArr.push(tagName);
         }
