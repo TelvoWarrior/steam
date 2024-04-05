@@ -2,7 +2,7 @@ import { t } from "testcafe";
 import { Logger } from "testcafe-reporter-acd-html-reporter/lib/Logger";
 import { TEST_URL } from "../test-data/configuration";
 import { MenuSteps } from "../page-objects/steps/menu-steps";
-import { CategoriesMenu, MainMenu, NewAndNoteworthyItem } from "../page-objects/elements/menu-button";
+import { CategoriesMenu, MainMenuButton, NewAndNoteworthyItem } from "../page-objects/elements/menu-button";
 import { SubGenreGamePageSteps } from "../page-objects/steps/sub-genre-game-page-steps";
 import { GameCardSteps } from "../page-objects/steps/game-card-steps";
 import { GameCardItem } from "../page-objects/entities/game-card";

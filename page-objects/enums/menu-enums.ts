@@ -12,15 +12,6 @@ export enum NewAndNoteworthy {
     //...etc
 }
 
-export enum GenreItems {
-    ACTION = `Action`,
-    ROLE_PLAYING = `Role-Playing`,
-    STRATEGY = `Strategy`,
-    ADVENTURE = `Adventure`,
-    SIMULATION = `Simulation`,
-    SPORTS_AND_RACING = `Sports & Racing`
-}
-
 export enum RolePlayingItems {
     ACTION_RPG = `Action RPG`,
     //..etc

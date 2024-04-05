@@ -1,5 +1,5 @@
 import { Selector } from "testcafe";
-import { GenreItems, MainMenuButtonEnum, NewAndNoteworthy, RolePlayingItems } from "../enums/menu-enums";
+import { MainMenuButtonEnum, NewAndNoteworthy, RolePlayingItems } from "../enums/menu-enums";
 import { BaseElement } from "./base-element";
 
 export class MenuButton extends BaseElement {
@@ -21,14 +21,26 @@ export class MainMenuButton extends MenuButton{
         return new MenuButton(Selector(`${this._menuSelector} .tab`).withExactText(`${item}`), `${item}`)
     }
 }
-
+export class CategoriesMenuEnum {
+    private constructor(public readonly name, public readonly propertyName) {
+ 
+    }
+    public static readonly ACTION = new CategoriesMenuEnum("Action", "action");
+    public static readonly ADVENTURE = new CategoriesMenuEnum("Adventure", "adventure");
+    public static readonly RPG = new CategoriesMenuEnum("Role-Playing", "rpg");
+    public static readonly SIMULATION = new CategoriesMenuEnum("Simulation", "simulation");
+    public static readonly STRATEGY = new CategoriesMenuEnum("Strategy", "strategy");
+    public static readonly SPORTS_AND_RACING = new CategoriesMenuEnum("Sports & Racing", "sports_and_racing");
+    //...etc
+}
 export class CategoriesMenu extends MenuButton{
-    public static readonly ACTION = new MenuButton(Selector(`#genre_flyout`).find('div[data-genre-group="action"]').nth(1), GenreItems.ACTION);
-    public static readonly ADVENTURE = new MenuButton(Selector(`#genre_flyout`).find('div[data-genre-group="adventure"]').nth(1), GenreItems.ADVENTURE);
-    public static readonly RPG = new MenuButton(Selector(`#genre_flyout`).find(`div[data-genre-group="rpg"]`).nth(1), GenreItems.ROLE_PLAYING);
-    public static readonly SIMULATION = new MenuButton(Selector(`#genre_flyout`).find('div[data-genre-group="simulation"]').nth(1), GenreItems.SIMULATION);
-    public static readonly STRATEGY = new MenuButton(Selector(`#genre_flyout`).find('div[data-genre-group="strategy"]').nth(1), GenreItems.STRATEGY);
-    public static readonly SPORTS_AND_RACING = new MenuButton(Selector(`#genre_flyout`).find('div[data-genre-group="sports_and_racing"]').nth(1), GenreItems.SPORTS_AND_RACING);
+    private static readonly _selectorHelper = Selector(`#genre_flyout`);
+    public static readonly ACTION = new MenuButton(this._selectorHelper.find(`div[data-genre-group=${CategoriesMenuEnum.ACTION.propertyName}]`).nth(1), CategoriesMenuEnum.ACTION.name);
+    public static readonly ADVENTURE = new MenuButton(this._selectorHelper.find(`div[data-genre-group=${CategoriesMenuEnum.ADVENTURE.propertyName}]`).nth(1), CategoriesMenuEnum.ADVENTURE.name);
+    public static readonly RPG = new MenuButton(this._selectorHelper.find(`div[data-genre-group=${CategoriesMenuEnum.RPG.propertyName}]`).nth(1), CategoriesMenuEnum.RPG.name);
+    public static readonly SIMULATION = new MenuButton(this._selectorHelper.find(`div[data-genre-group=${CategoriesMenuEnum.SIMULATION.propertyName}]`).nth(1), CategoriesMenuEnum.SIMULATION.name);
+    public static readonly STRATEGY = new MenuButton(this._selectorHelper.find(`div[data-genre-group=${CategoriesMenuEnum.STRATEGY.propertyName}]`).nth(1), CategoriesMenuEnum.STRATEGY.name);
+    public static readonly SPORTS_AND_RACING = new MenuButton(this._selectorHelper.find(`div[data-genre-group=${CategoriesMenuEnum.SPORTS_AND_RACING.propertyName}]`).nth(1), CategoriesMenuEnum.SPORTS_AND_RACING.name);
 }
 
 export class SubcategoryItem extends MenuButton {
