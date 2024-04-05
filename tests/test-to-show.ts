@@ -78,7 +78,6 @@ test('Steam test', async () => {
     Logger.step(7, `Click add to card button -> View cart. Check that Your Shopping Cart page is opened, game name, prices in the game card and total price are the same with the previous pages`)
     await GamePageSteps.clickGamePageItem(GamePage.ADD_TO_CART);
     const gameCardDataInDialogWindow = await DialogWindowSteps.getGameCardData();
-    await t.debug();
     await DialogWindowSteps.clickDialogWindowItem(DialogWindow.VIEW_MY_CART);
     const gameCardDataInCartPage = await ShoppingCartSteps.getGameCardData();
     await ShoppingCartSteps.checkShoppingCartPageOpened(ShoppingCart.PAGE_TITLE);

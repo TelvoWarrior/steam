@@ -26,21 +26,18 @@ export class GameCard {
     private _reviewsCountCardSelector: Label;
     private _priceCardSelector: Label;
     private _addToCartButton: Button;
-    private _freeToPlay: Label;
-    private _playForFree: Button;
     private _discountLabelCardSelector: Label;
     private _regularPriceSelector: Label;
     private _discountPriceSelector: Label;
-    private _newLabelCardSelector: Label;
     private _wishListButton: Button;
 
     constructor(nth: number = 0) {
         this._gameCardSelector = Selector(`div[class*="sale_item_browser"]`).find(`div[class="ImpressionTrackedElement"]`).nth(nth);
         this._gameTitleCardSelector = new Label(this._gameCardSelector.find(`div[class*="StoreSaleWidgetTitle"]`), GameCardItem.GAME_TITLE);
-        this._genreTagsCardSelector = this._gameCardSelector.child(0).child(0).child(1).child(2).child(0).child('a').filterVisible();
-        this._releaseDateCardSelector = new Label(this._gameCardSelector.child(0).child(0).child(1).child(2).child(1).child(0), GameCardItem.RELEASE_DATE);
-        this._reviewsSummaryCardSelector = new Label(this._gameCardSelector.child(0).child(0).child(1).child(2).child(2).child(0).child(0), GameCardItem.REVIEW_SUMMARY);
-        this._reviewsCountCardSelector = new Label(this._gameCardSelector.child(0).child(0).child(1).child(2).child(2).child(0).child(1), GameCardItem.REVIEW_COUNT);
+        this._genreTagsCardSelector = this._gameCardSelector.find(`a[class*="WidgetTag"]`).filterVisible();
+        this._releaseDateCardSelector = new Label(this._gameCardSelector.find(`span`).prevSibling(0), GameCardItem.RELEASE_DATE);
+        this._reviewsSummaryCardSelector = new Label(this._gameCardSelector.find(`a[href*="reviews"]`).find(`div`).withText(``).nth(1), GameCardItem.REVIEW_SUMMARY);
+        this._reviewsCountCardSelector = new Label(this._gameCardSelector.find(`a[href*="reviews"]`).find(`div`).withText(`Reviews`).nth(1), GameCardItem.REVIEW_COUNT);
         this._priceCardSelector = new Label(this._gameCardSelector.find('div[class*="StoreSalePriceWidgetContainer"]').child(0), GameCardItem.PRICE);
         this._addToCartButton = new Button(this._gameCardSelector.find('span').withText('Add to Cart'), GameCardItem.ADD_TO_CART);
         this._discountLabelCardSelector = new Label(this._gameCardSelector.find('div[class*="StoreSalePriceWidgetContainer"]').child().withText('%'), GameCardItem.DISCOUNT_LABEL);
