@@ -1,25 +1,25 @@
 import { t } from "testcafe";
-import { MenuItem } from "../elements/menu-item";
+import { MenuButton } from "../elements/menu-button";
 
 export class MenuStepsImpl {
-    async hoverMenuItem(item: MenuItem) {
+    async hoverMenuButton(item: MenuButton) {
         await item.hover();
     }
-    async clickMenuItem(item: MenuItem) {
+    async clickMenuButton(item: MenuButton) {
         await item.click();
     }
-    async checkMenuItemExists(item: MenuItem) {
+    async checkMenuButtonExists(item: MenuButton) {
         await t.expect(item.exists).ok(`Check ${item} exists`);
     }
-    async checkMenuItemVisible(item: MenuItem) {
+    async checkMenuButtonVisible(item: MenuButton) {
         await t.expect(item.visible).ok(`Check ${item} visible`);
     }
 
-    async checkCategoryHasSubcategory(item: MenuItem) {
+    async checkCategoryHasSubcategory(item: MenuButton) {
         await t.expect(this.getParentSelector(item).nextSibling(0).find('a').exists).ok(`Check ${item} category has subcategory`);
     }
 
-    private getParentSelector(item: MenuItem) {
+    private getParentSelector(item: MenuButton) {
         return item.parentSelector;
     }
 }

@@ -2,11 +2,20 @@ import { t } from "testcafe";
 import { SubGenreGamePage } from "../pages/sub-genre-game-page";
 import { GameCardItem } from "../entities/game-card";
 import { GameCardSteps } from "./game-card-steps";
+import { Logger } from "testcafe-reporter-acd-html-reporter/lib/Logger";
 
 export class SubGenreGamePageStepsImpl {
     async hoverGameCard(nth: number) {
         await this.scrollIntoGameList()
         await t.hover(SubGenreGamePage.GAME_CARD_SELECTOR.nth(nth));
+    }
+
+    async checkGameCardSizeChangedAfterHover(nth:number){
+        Logger.info(`Get card's width. Hover it. Get it again. Check it changed`);
+        const widthValueBeforeHover = await SubGenreGamePage.GAME_CARD_SELECTOR.nth(nth).child(0).child(0).getStyleProperty(`width`);
+        await SubGenreGamePageSteps.hoverGameCard(nth);
+        const widthValueAfterHover = await SubGenreGamePage.GAME_CARD_SELECTOR.nth(nth).child(0).child(0).getStyleProperty(`width`);
+        await t.expect(widthValueBeforeHover!=widthValueAfterHover).ok(`Game card size changed after hover`);
     }
 
     async scrollIntoGameList() {

@@ -55,7 +55,7 @@ export class GameCard {
         this._wishListButton = new Button(this._gameCardSelector.find('div[class*="WishlistButton"]'), GameCardItem.WISHLIST_BUTTON);
     }
 
-    static getSelector(nth: number, control: GameCardItem) {
+    static getElement(nth: number, control: GameCardItem) {
         const gameCard = new GameCard(nth)
         switch (control) {
             case GameCardItem.GAME_TITLE:

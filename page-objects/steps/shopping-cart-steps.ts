@@ -19,7 +19,7 @@ export class ShoppingCartStepsImpl extends ShoppingCart {
         return gameCardDataInShoppingCart
     }
     async getCartItemInnerText(nth: number, control: CartItemEnum) {
-        return await CartItem.getSelector(nth, control).innerText;
+        return await CartItem.getElement(nth, control).innerText;
     }
 
     async checkGameCardData(gameCardDataInGameList: {

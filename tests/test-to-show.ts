@@ -2,7 +2,7 @@ import { t } from "testcafe";
 import { Logger } from "testcafe-reporter-acd-html-reporter/lib/Logger";
 import { TEST_URL } from "../test-data/configuration";
 import { MenuSteps } from "../page-objects/steps/menu-steps";
-import { CategoriesMenu, MainMenu, NewAndNoteworthyItem, SubcategoryItem } from "../page-objects/elements/menu-item";
+import { CategoriesMenu, MainMenuButton, NewAndNoteworthyItem, SubcategoryItem } from "../page-objects/elements/menu-button";
 import { SubGenreGamePageSteps } from "../page-objects/steps/sub-genre-game-page-steps";
 import { GameCardSteps } from "../page-objects/steps/game-card-steps";
 import { GameCardItem } from "../page-objects/entities/game-card";
@@ -10,7 +10,7 @@ import { GameTag } from "../page-objects/enums/game-tags";
 import { SubGenreGamePage } from "../page-objects/pages/sub-genre-game-page";
 import { GamePageSteps } from "../page-objects/steps/game-page-steps";
 import { GamePage } from "../page-objects/pages/game-page";
-import { DialogWindow, DialogWindowItem } from "../page-objects/entities/dialog-window";
+import { DialogWindow } from "../page-objects/entities/dialog-window";
 import { DialogWindowSteps } from "../page-objects/steps/dialog-window-steps";
 import { ShoppingCartSteps } from "../page-objects/steps/shopping-cart-steps";
 import { ShoppingCart } from "../page-objects/pages/shopping-cart";
@@ -21,7 +21,7 @@ fixture('Steam Project')
 test('Steam test', async () => {
     await t.maximizeWindow();
     Logger.step(1, 'Open Categories menu. Check each category has subcategory');
-    await MenuSteps.hoverMenuItem(MainMenu.CATEGORIES);
+    await MenuSteps.hoverMenuButton(MainMenuButton.CATEGORIES);
     await MenuSteps.checkCategoryHasSubcategory(CategoriesMenu.ACTION);
     await MenuSteps.checkCategoryHasSubcategory(CategoriesMenu.ADVENTURE);
     await MenuSteps.checkCategoryHasSubcategory(CategoriesMenu.RPG);
@@ -30,18 +30,17 @@ test('Steam test', async () => {
     await MenuSteps.checkCategoryHasSubcategory(CategoriesMenu.SPORTS_AND_RACING);
 
     Logger.step(2, 'Select Action RPG category. Check there is at least 1 game with Action RPG tag within genres list');
-    await MenuSteps.clickMenuItem(SubcategoryItem.ACTION_RPG);
+    await MenuSteps.clickMenuButton(SubcategoryItem.ACTION_RPG);
     await SubGenreGamePageSteps.checkGameCardWithSpecifiedTagExists(GameTag.ACTION_RPG);
 
     Logger.step(3, `Hover game with Action RPG tag. Check its size changes and Add to wishlist button appears`);
     const gameCardIndex = await SubGenreGamePageSteps.getGameCardIndexWithSpecifiedTag(GameTag.ACTION_RPG);
-    await t.debug();
-    await SubGenreGamePageSteps.hoverGameCard(gameCardIndex);
+    await SubGenreGamePageSteps.checkGameCardSizeChangedAfterHover(gameCardIndex);
     await GameCardSteps.checkGameCardItemVisible(gameCardIndex, GameCardItem.WISHLIST_BUTTON);
 
     Logger.step(4, `Go to New & Noteworthy -> Special Offers. Check that each game card has discount label and 2 prices.`);
-    await MenuSteps.hoverMenuItem(MainMenu.NEW_AND_NOTEWORTHY);
-    await MenuSteps.clickMenuItem(NewAndNoteworthyItem.SPECIAL_OFFERS);
+    await MenuSteps.hoverMenuButton(MainMenuButton.NEW_AND_NOTEWORTHY);
+    await MenuSteps.clickMenuButton(NewAndNoteworthyItem.SPECIAL_OFFERS);
     await SubGenreGamePageSteps.scrollIntoGameList();
     const len = await SubGenreGamePage.GAME_CARD_SELECTOR.count;
     for (let i = 0; i < len-1; i++) {
@@ -53,7 +52,23 @@ test('Steam test', async () => {
     
     Logger.step(5, `Hover game with the biggest discount. Check that the card changed its color`)
     const maxDiscountIndex = await GameCardSteps.getMaxDiscountGameCardIndex()
-    await GameCardSteps.hoverGameCardItem(maxDiscountIndex, GameCardItem.GAME_TITLE);
+    
+
+    // let widthValueBeforeHover = await SubGenreGamePage.GAME_CARD_SELECTOR.nth(maxDiscountIndex).child(0).child(0).getStyleProperty(`background-image`);
+    // console.log(`BEFORE: ${widthValueBeforeHover}`)
+    
+    // await GameCardSteps.hoverGameCardItem(maxDiscountIndex, GameCardItem.GAME_TITLE);
+    
+    // let widthValueAfterHover = await SubGenreGamePage.GAME_CARD_SELECTOR.nth(maxDiscountIndex).child(0).child(0).getStyleProperty(`background-image`);
+    // console.log(`AFTER: ${widthValueAfterHover}`)
+    
+    // let x = Object.values(widthValueAfterHover)[0]
+
+    // Object.entries(widthValueAfterHover).forEach(([key, value]) => {
+    //     console.log(`${key}: ${value}`);
+    // });
+
+    await t.debug();
 
     Logger.step(6, `Go to the game page. Check...`)
     const gameCardDataInGameList = await GameCardSteps.getGameCardData(maxDiscountIndex);
@@ -75,6 +90,7 @@ test('Steam test', async () => {
     const advGameDataInGamePage = await GamePageSteps.getGameCardData();
     await GamePageSteps.clickGamePageItem(GamePage.ADD_TO_CART);
     await DialogWindowSteps.clickDialogWindowItem(DialogWindow.VIEW_MY_CART);
+    await t.debug();
     const advGameDataInCartPage = await ShoppingCartSteps.getGameCardData(0);
     await ShoppingCartSteps.checkGamesAmountInShoppingCart(2);
     const gameDataAfterAddAdvGame = await ShoppingCartSteps.getGameCardData(1);
