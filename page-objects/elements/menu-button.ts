@@ -4,12 +4,12 @@ import { BaseElement } from "./base-element";
 
 export class MenuButton extends BaseElement {
     constructor(selector: string | Selector, elementName: string) {
-        super(selector, elementName, 'Menu Button')
+        super(selector, elementName, `Menu Button`)
     }
 }
 
-export class MainMenuButton extends MenuButton{
-    private readonly _menuSelector = ".store_nav_bg";
+export class MainMenuButton extends MenuButton {
+    private readonly _menuSelector = `.store_nav_bg`;
     public static readonly YOUR_STORE = new MenuButton(Selector(`.store_nav_bg .tab`).withExactText(MainMenuButtonEnum.YOUR_STORE), MainMenuButtonEnum.YOUR_STORE);
     public static readonly NEW_AND_NOTEWORTHY = new MenuButton(Selector(`.store_nav_bg .tab`).withExactText(MainMenuButtonEnum.NEW_AND_NOTEWORTHY), MainMenuButtonEnum.NEW_AND_NOTEWORTHY);
     public static readonly CATEGORIES = new MenuButton(Selector(`.store_nav_bg .tab`).withExactText(MainMenuButtonEnum.CATEGORIES), MainMenuButtonEnum.CATEGORIES);
@@ -23,7 +23,7 @@ export class MainMenuButton extends MenuButton{
 }
 export class CategoriesMenuEnum {
     private constructor(public readonly name, public readonly propertyName) {
- 
+
     }
     public static readonly ACTION = new CategoriesMenuEnum("Action", "action");
     public static readonly ADVENTURE = new CategoriesMenuEnum("Adventure", "adventure");
@@ -33,7 +33,7 @@ export class CategoriesMenuEnum {
     public static readonly SPORTS_AND_RACING = new CategoriesMenuEnum("Sports & Racing", "sports_and_racing");
     //...etc
 }
-export class CategoriesMenu extends MenuButton{
+export class CategoriesMenu extends MenuButton {
     private static readonly _selectorHelper = Selector(`#genre_flyout`);
     public static readonly ACTION = new MenuButton(this._selectorHelper.find(`div[data-genre-group=${CategoriesMenuEnum.ACTION.propertyName}]`).nth(1), CategoriesMenuEnum.ACTION.name);
     public static readonly ADVENTURE = new MenuButton(this._selectorHelper.find(`div[data-genre-group=${CategoriesMenuEnum.ADVENTURE.propertyName}]`).nth(1), CategoriesMenuEnum.ADVENTURE.name);
@@ -44,11 +44,11 @@ export class CategoriesMenu extends MenuButton{
 }
 
 export class SubcategoryItem extends MenuButton {
-    public static readonly ACTION_RPG = new MenuButton(Selector(`#genre_flyout`).find(`a[class="popup_menu_item"]`).withExactText(`${RolePlayingItems.ACTION_RPG}`),`${RolePlayingItems.ACTION_RPG}`);
+    public static readonly ACTION_RPG = new MenuButton(Selector(`#genre_flyout`).find(`a[class="popup_menu_item"]`).withExactText(`${RolePlayingItems.ACTION_RPG}`), RolePlayingItems.ACTION_RPG);
     //...etc
 }
 
 export class NewAndNoteworthyItem extends MenuButton {
-    public static readonly SPECIAL_OFFERS = new MenuButton(Selector(`#noteworthy_flyout`).find(`a[class="popup_menu_item"]`).withExactText(`${NewAndNoteworthy.SPECIAL_OFFERS}`), `${NewAndNoteworthy.SPECIAL_OFFERS}`);
+    public static readonly SPECIAL_OFFERS = new MenuButton(Selector(`#noteworthy_flyout`).find(`a[class="popup_menu_item"]`).withExactText(`${NewAndNoteworthy.SPECIAL_OFFERS}`), NewAndNoteworthy.SPECIAL_OFFERS);
     //...etc
 }

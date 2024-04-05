@@ -68,8 +68,6 @@ test('Steam test', async () => {
     //     console.log(`${key}: ${value}`);
     // });
 
-    await t.debug();
-
     Logger.step(6, `Go to the game page. Check...`)
     const gameCardDataInGameList = await GameCardSteps.getGameCardData(maxDiscountIndex);
     await GameCardSteps.clickGameCardItem(maxDiscountIndex, GameCardItem.GAME_TITLE);
@@ -80,6 +78,7 @@ test('Steam test', async () => {
     Logger.step(7, `Click add to card button -> View cart. Check that Your Shopping Cart page is opened, game name, prices in the game card and total price are the same with the previous pages`)
     await GamePageSteps.clickGamePageItem(GamePage.ADD_TO_CART);
     const gameCardDataInDialogWindow = await DialogWindowSteps.getGameCardData();
+    await t.debug();
     await DialogWindowSteps.clickDialogWindowItem(DialogWindow.VIEW_MY_CART);
     const gameCardDataInCartPage = await ShoppingCartSteps.getGameCardData();
     await ShoppingCartSteps.checkShoppingCartPageOpened(ShoppingCart.PAGE_TITLE);
@@ -90,7 +89,6 @@ test('Steam test', async () => {
     const advGameDataInGamePage = await GamePageSteps.getGameCardData();
     await GamePageSteps.clickGamePageItem(GamePage.ADD_TO_CART);
     await DialogWindowSteps.clickDialogWindowItem(DialogWindow.VIEW_MY_CART);
-    await t.debug();
     const advGameDataInCartPage = await ShoppingCartSteps.getGameCardData(0);
     await ShoppingCartSteps.checkGamesAmountInShoppingCart(2);
     const gameDataAfterAddAdvGame = await ShoppingCartSteps.getGameCardData(1);
