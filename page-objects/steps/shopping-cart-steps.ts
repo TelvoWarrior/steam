@@ -1,7 +1,7 @@
 import { Selector, t } from "testcafe";
 import { ShoppingCart } from "../pages/shopping-cart";
 import { Label } from "../elements/label";
-import { CartItem, CartItemEnum } from "../entities/cart-item";
+import { CartItem, CartItemEnum } from "../panels/cart-item";
 import { Logger } from "testcafe-reporter-acd-html-reporter/lib/Logger";
 
 export class ShoppingCartStepsImpl extends ShoppingCart {

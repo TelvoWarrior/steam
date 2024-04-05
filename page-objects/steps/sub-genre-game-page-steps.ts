@@ -1,6 +1,6 @@
 import { t } from "testcafe";
 import { SubGenreGamePage } from "../pages/sub-genre-game-page";
-import { GameCardItem } from "../entities/game-card";
+import { GameCardItem } from "../panels/game-card";
 import { GameCardSteps } from "./game-card-steps";
 import { Logger } from "testcafe-reporter-acd-html-reporter/lib/Logger";
 

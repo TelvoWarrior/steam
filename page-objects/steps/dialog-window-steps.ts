@@ -1,4 +1,4 @@
-import { DialogWindow } from "../entities/dialog-window";
+import { DialogWindow } from "../panels/dialog-window";
 import { BaseElement } from "../elements/base-element";
 
 export class DialogWindowStepsImpl extends DialogWindow {

@@ -1,5 +1,5 @@
 import { t } from "testcafe";
-import { GameCard, GameCardItem } from "../entities/game-card";
+import { GameCard, GameCardItem } from "../panels/game-card";
 import { SubGenreGamePage } from "../pages/sub-genre-game-page";
 
 export class GameCardStepsImpl extends GameCard {
