@@ -1,5 +1,5 @@
 import { t } from "testcafe";
-import { MenuButton } from "../elements/menu-item";
+import { MenuButton } from "../elements/menu-button";
 
 export class MenuStepsImpl {
     async hoverMenuButton(item: MenuButton) {

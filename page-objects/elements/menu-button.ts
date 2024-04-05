@@ -9,12 +9,17 @@ export class MenuButton extends BaseElement {
 }
 
 export class MainMenuButton extends MenuButton{
-    public static readonly YOUR_STORE = new MenuButton(Selector(`#foryou_tab`), MainMenuButtonEnum.YOUR_STORE);
-    public static readonly NEW_AND_NOTEWORTHY = new MenuButton(Selector(`#noteworthy_tab`), MainMenuButtonEnum.NEW_AND_NOTEWORTHY);
-    public static readonly CATEGORIES = new MenuButton(Selector(`#genre_tab`), MainMenuButtonEnum.CATEGORIES);
-    public static readonly POINTS_SHOP = new MenuButton(Selector(`#genre_tab`).nextSibling(1), MainMenuButtonEnum.POINTS_SHOP);
-    public static readonly NEWS = new MenuButton(Selector(`#genre_tab`).nextSibling(2), MainMenuButtonEnum.NEWS);
-    public static readonly LABS = new MenuButton(Selector(`#genre_tab`).nextSibling(3), MainMenuButtonEnum.LABS);
+    private readonly _menuSelector = ".store_nav_bg";
+    public static readonly YOUR_STORE = new MenuButton(Selector(`.store_nav_bg .tab`).withExactText(MainMenuButtonEnum.YOUR_STORE), MainMenuButtonEnum.YOUR_STORE);
+    public static readonly NEW_AND_NOTEWORTHY = new MenuButton(Selector(`.store_nav_bg .tab`).withExactText(MainMenuButtonEnum.NEW_AND_NOTEWORTHY), MainMenuButtonEnum.NEW_AND_NOTEWORTHY);
+    public static readonly CATEGORIES = new MenuButton(Selector(`.store_nav_bg .tab`).withExactText(MainMenuButtonEnum.CATEGORIES), MainMenuButtonEnum.CATEGORIES);
+    public static readonly POINTS_SHOP = new MenuButton(Selector(`.store_nav_bg .tab`).withExactText(MainMenuButtonEnum.POINTS_SHOP), MainMenuButtonEnum.POINTS_SHOP);
+    public static readonly NEWS = new MenuButton(Selector(`.store_nav_bg .tab`).withExactText(MainMenuButtonEnum.NEWS), MainMenuButtonEnum.NEWS);
+    public static readonly LABS = new MenuButton(Selector(`.store_nav_bg .tab`).withExactText(MainMenuButtonEnum.LABS), MainMenuButtonEnum.LABS);
+
+    getMenuItem(item: MainMenuButton) {
+        return new MenuButton(Selector(`${this._menuSelector} .tab`).withExactText(`${item}`), `${item}`)
+    }
 }
 
 export class CategoriesMenu extends MenuButton{

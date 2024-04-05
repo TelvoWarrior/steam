@@ -5,8 +5,6 @@ export enum MainMenuButtonEnum {
     POINTS_SHOP = `Points Shop`,
     NEWS = `News`,
     LABS = `Labs`,
-    SEARCH_FIELD = `Search Field`,
-    SEARCH_BUTTON = `Search Button`
 }
 
 export enum NewAndNoteworthy {
