@@ -90,6 +90,7 @@ test('Steam test', async () => {
     const advGameDataInGamePage = await GamePageSteps.getGameCardData();
     await GamePageSteps.clickGamePageItem(GamePage.ADD_TO_CART);
     await DialogWindowSteps.clickDialogWindowItem(DialogWindow.VIEW_MY_CART);
+    await t.debug();
     const advGameDataInCartPage = await ShoppingCartSteps.getGameCardData(0);
     await ShoppingCartSteps.checkGamesAmountInShoppingCart(2);
     const gameDataAfterAddAdvGame = await ShoppingCartSteps.getGameCardData(1);
