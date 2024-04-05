@@ -11,7 +11,7 @@ import { GamePage } from "../page-objects/pages/game-page";
 import { DialogWindow } from "../page-objects/entities/dialog-window";
 import { DialogWindowSteps } from "../page-objects/steps/dialog-window-steps";
 import { ShoppingCartSteps } from "../page-objects/steps/shopping-cart-steps";
-import { MainMenuItem } from "../page-objects/enums/menu-enums";
+import { MainMenuButtonEnum } from "../page-objects/enums/menu-enums";
 
 fixture('Steam Project')
     .page(TEST_URL);
@@ -19,8 +19,8 @@ fixture('Steam Project')
 test('Steam test', async () => {
     await t.maximizeWindow();
     // Logger.step(1, 'First step');
-    // await MenuSteps.hoverMenuItem(MainMenu.NEW_AND_NOTEWORTHY);
-    // await MenuSteps.clickMenuItem(NewAndNoteworthyItem.SPECIAL_OFFERS);
+    // await MenuSteps.hoverMenuButton(MainMenu.NEW_AND_NOTEWORTHY);
+    // await MenuSteps.clickMenuButton(NewAndNoteworthyItem.SPECIAL_OFFERS);
     // await SubGenreGamePageSteps.scrollIntoGameList(); 
     // const gameDataInGameList = await GameCardSteps.getGameCardData(0);
     // await GameCardSteps.clickGameCardItem(0, GameCardItem.GAME_TITLE);

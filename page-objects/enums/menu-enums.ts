@@ -1,4 +1,4 @@
-export enum MainMenuItem {
+export enum MainMenuButtonEnum {
     YOUR_STORE = `Your Store`,
     NEW_AND_NOTEWORTHY = `New & Noteworthy`,
     CATEGORIES = `Categories`,
