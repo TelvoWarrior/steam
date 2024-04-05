@@ -1,7 +1,6 @@
-import { Selector, t } from "testcafe";
+import { t } from "testcafe";
 import { GameCard, GameCardItem } from "../entities/game-card";
 import { SubGenreGamePage } from "../pages/sub-genre-game-page";
-import { Logger } from "testcafe-reporter-acd-html-reporter/lib/Logger";
 
 export class GameCardStepsImpl extends GameCard {
     async hoverGameCardItem(nth: number, control: GameCardItem) {

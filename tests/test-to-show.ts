@@ -52,7 +52,23 @@ test('Steam test', async () => {
     
     Logger.step(5, `Hover game with the biggest discount. Check that the card changed its color`)
     const maxDiscountIndex = await GameCardSteps.getMaxDiscountGameCardIndex()
-    await GameCardSteps.hoverGameCardItem(maxDiscountIndex, GameCardItem.GAME_TITLE);
+    
+
+    // let widthValueBeforeHover = await SubGenreGamePage.GAME_CARD_SELECTOR.nth(maxDiscountIndex).child(0).child(0).getStyleProperty(`background-image`);
+    // console.log(`BEFORE: ${widthValueBeforeHover}`)
+    
+    // await GameCardSteps.hoverGameCardItem(maxDiscountIndex, GameCardItem.GAME_TITLE);
+    
+    // let widthValueAfterHover = await SubGenreGamePage.GAME_CARD_SELECTOR.nth(maxDiscountIndex).child(0).child(0).getStyleProperty(`background-image`);
+    // console.log(`AFTER: ${widthValueAfterHover}`)
+    
+    // let x = Object.values(widthValueAfterHover)[0]
+
+    // Object.entries(widthValueAfterHover).forEach(([key, value]) => {
+    //     console.log(`${key}: ${value}`);
+    // });
+
+    await t.debug();
 
     Logger.step(6, `Go to the game page. Check...`)
     const gameCardDataInGameList = await GameCardSteps.getGameCardData(maxDiscountIndex);

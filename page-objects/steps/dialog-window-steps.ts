@@ -1,5 +1,4 @@
-import { t } from "testcafe";
-import { DialogWindow, DialogWindowItem } from "../entities/dialog-window";
+import { DialogWindow } from "../entities/dialog-window";
 import { BaseElement } from "../elements/base-element";
 
 export class DialogWindowStepsImpl extends DialogWindow {
